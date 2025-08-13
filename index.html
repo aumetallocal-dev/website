@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Au Métal Local - Forgeron Traditionnel</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Crimson Text', serif;
+            background: linear-gradient(135deg, #2c1810 0%, #4a3429 50%, #2c1810 100%);
+            color: #f4e4bc;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(45deg, #1a0f08, #3d2817);
+            padding: 2rem 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            border-bottom: 3px solid #d4af37;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="50" font-size="60" opacity="0.1" fill="%23d4af37">⚒</text></svg>') repeat;
+            animation: float 20s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+        
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #d4af37;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.8);
+            margin-bottom: 0.5rem;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { text-shadow: 3px 3px 6px rgba(0,0,0,0.8), 0 0 10px rgba(212,175,55,0.3); }
+            to { text-shadow: 3px 3px 6px rgba(0,0,0,0.8), 0 0 20px rgba(212,175,55,0.6); }
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            font-style: italic;
+            color: #c9a96e;
+            margin-bottom: 1rem;
+        }
+        
+        .code-fer {
+            background: rgba(212,175,55,0.15);
+            border: 1px solid rgba(212,175,55,0.4);
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            font-size: 1.1rem;
+            color: #d4af37;
+            font-family: 'Cinzel', serif;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .forge-symbol {
+            font-size: 4rem;
+            margin: 1rem 0;
+            display: block;
+            animation: hammer 3s ease-in-out infinite;
+        }
+        
+        @keyframes hammer {
+            0%, 90%, 100% { transform: rotate(0deg); }
+            5%, 15% { transform: rotate(-15deg); }
+            10% { transform: rotate(15deg); }
+        }
+        
+        nav {
+            background: rgba(26, 15, 8, 0.9);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .nav-list {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .nav-list a {
+            color: #f4e4bc;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-list a:hover {
+            background: #d4af37;
+            color: #2c1810;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(212,175,55,0.4);
+        }
+        
+        main {
+            padding: 3rem 0;
+        }
+        
+        .section {
+            background: rgba(26, 15, 8, 0.7);
+            margin: 2rem 0;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+            border: 1px solid rgba(212,175,55,0.2);
+            backdrop-filter: blur(10px);
+        }
+        
+        .section h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            color: #d4af37;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        .section h2::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #d4af37, transparent);
+            margin: 10px auto;
+        }
+        
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .item-card {
+            background: linear-gradient(145deg, rgba(61,40,23,0.8), rgba(26,15,8,0.8));
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .item-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #d4af37, #c9a96e, #d4af37);
+            border-radius: 12px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .item-card:hover::before {
+            opacity: 0.3;
+        }
+        
+        .item-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(212,175,55,0.15);
+        }
+        
+        .item-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            color: #d4af37;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .item-description {
+            color: #c9a96e;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+        
+        .item-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+        }
+        
+        .item-price {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #90EE90;
+        }
+        
+        .item-stock {
+            font-size: 0.9rem;
+            color: #ffd700;
+            font-style: italic;
+        }
+        
+        .contact-info {
+            background: linear-gradient(135deg, rgba(212,175,55,0.1), rgba(201,169,110,0.1));
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+            border: 1px solid rgba(212,175,55,0.3);
+        }
+        
+        .contact-info h3 {
+            font-family: 'Cinzel', serif;
+            color: #d4af37;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+        
+        .minecraft-username {
+            font-size: 1.3rem;
+            color: #90EE90;
+            font-weight: 600;
+            background: rgba(26,15,8,0.5);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            display: inline-block;
+            margin: 0.5rem;
+        }
+        
+        footer {
+            background: #1a0f08;
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 3rem;
+            border-top: 3px solid #d4af37;
+        }
+        
+        .footer-text {
+            color: #c9a96e;
+            font-style: italic;
+        }
+        
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .nav-list { gap: 1rem; }
+            .items-grid { grid-template-columns: 1fr; }
+            .section { padding: 1.5rem; }
+        }
+        
+        .intro-text {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #c9a96e;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            line-height: 1.8;
+        }
+        
+        .status-available { color: #90EE90; }
+        .status-limited { color: #FFD700; }
+        .status-sold-out { color: #FF6B6B; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <h1>Au Métal Local</h1>
+                <span class="forge-symbol">⚒️</span>
+                <p class="subtitle">Métal de qualité • Frappé à la main, selon la tradition</p>
+                <div class="code-fer">
+                    <em>Respect du Code du Fer</em>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul class="nav-list">
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#armes">Armes</a></li>
+                <li><a href="#armures">Armures</a></li>
+                <li><a href="#outils">Outils</a></li>
+                <li><a href="#objets-speciaux">Objets Spéciaux</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            <section id="accueil" class="section">
+                <h2>Bienvenue chez Au Métal Local</h2>
+                <p class="intro-text">
+                    Salutations, aventurier ! Ici, nous respectons le <strong>Code du Fer</strong>. 
+                    Chaque pièce est forgée avec du métal local de qualité supérieure, 
+                    frappée à la main selon les traditions ancestrales. Pas de production de masse, 
+                    pas de raccourcis - seulement l'art véritable de la forge et le respect 
+                    des méthodes traditionnelles qui font la différence entre un simple objet et une œuvre d'art.
+                </p>
+            </section>
+
+            <section id="armes" class="section">
+                <h2>⚔️ Armes CàC & Distance</h2>
+                <div class="items-grid">
+                    <div class="item-card">
+                        <div class="item-name">Épée de Défense</div>
+                        <div class="item-description">
+                            • Épée en diamant pour se défendre.<br>
+                            • Tranchant IV et Solidité III.
+                        </div>
+                        <div class="item-details">
+                            <span class="item-price">? €</span>
+                            <!-- <span class="item-stock status-available">✓ Artisanale (2 pièces)</span> -->
+                              <!-- <span class="item-stock status-available">✓ Fait main (3 pièces)</span> -->
+                              <!-- <span class="item-stock status-limited">⚠ Sur commande (tradition oblige)</span> -->
+                              <!-- <span class="item-stock status-available">✓ En stock (2)</span> -->
+                              <!-- <span class="item-stock status-limited">⚠ Sur commande uniquement</span> -->
+                              <!-- <span class="item-stock status-limited">⚠ Stock limité (2)</span> -->
+                              <!-- <span class="item-stock status-limited">⚠ Pièce unique (1)</span> -->
+                            <span class="item-stock status-sold-out">✗ Rupture de stock</span>
+                        </div>
+                    </div>
+
+                    <div class="item-card">
+                        <div class="item-name">Épée du Chasseur</div>
+                        <div class="item-description">
+                            • Épée en diamant pour plus de butins.<br>
+                            • Tranchant IV, Butin III et Solidité III.
+                        </div>
+                        <div class="item-details">
+                            <span class="item-price">? €</span>
+                            <span class="item-stock status-sold-out">✗ Rupture de stock</span>
+                        </div>
+                    </div>
+                    
+                    <div class="item-card">
+                        <div class="item-name">Arc Composite</div>
+                        <div class="item-description">
+                            • Arc de bonne facture.<br>
+                            • Puissance IV, Infinité I et Solidité III.
+                        </div>
+                        <div class="item-details">
+                            <span class="item-price">? €</span>
+                            <span class="item-stock status-sold-out">✗ Rupture de stock</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="armures" class="section">
+                <h2>🛡️ Armures Enchantées</h2>
+                <div class="items-grid">
+
+                    <div class="item-card">
+                        <div class="item-name">Set Complet Diamant</div>
+                        <div class="item-description">
+                            • Armure complète en diamant pour mieux encaisser.<br>
+                            • Protection IV et Solidité III.
+                        </div>
+                        <div class="item-details">
+                            <span class="item-price">? €</span>
+                            <span class="item-stock status-sold-out">✗ Rupture de stock</span>
+                        </div>
+                    </div>
+                    
+                    <div class="item-card">
+                        <div class="item-name">Casque du Plongeur</div>
+                        <div class="item-description">
+                            • Casque en diamant parfait pour l'exploration sous-marine.<br>
+                            • Respiration III et Solidité III.
+                        </div>
+                        <div class="item-details">
+                            <span class="item-price">? €</span>
+                            <span class="item-stock status-sold-out">✗ Rupture de stock</span>
+                        </div>
+                    </div>
+                    
+                    <div class="item-card">
+                        <div class="item-name">Bottes Ailées</div>
+                        <div class="item-description">
+                            • Bottes enchantées pour des déplacements rapides et sûrs.<br>
+                            • Chute amortie IV, Agilité III et Solidité III.
+                        </div>
+                        <div class="item-details">
+                            <span class="item-price">? €</span>
+                            <span class="item-stock status-sold-out">✗ Rupture de stock</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="outils" class="section">
+                <h2>🔨 Outils de Maître</h2>
+                <div class="items-grid">
+
+
+                    <!-- Pioche d'Appoint -->
+                    <div class="item-card">
+                        <div class="item-name">Pioche d'Appoint</div>
+                        <div class="item-description">
+                            • Pioche en diamant pour une utilisation banale.<br>
+                            • Efficacité IV et Solidité III.
+                        </div>
+                        <div class="item-details">
+                            <span class="item-price">? €</span>
+                            <span class="item-stock status-sold-out">✗ Rupture de stock</span>
+                        </div>
+                    </div>
+                    <!-- Pioche du Mineur -->
+                    <div class="item-card">
+                        <div class="item-name">Pioche du Mineur</div>
+                        <div class="item-description">
+                            • Pioche en diamant pour plus de butins.<br>
+                            • Efficacité IV, Fortune III et Solidité III.
+                        </div>
+                        <div class="item-details">
+                            <span class="item-price">? €</span>
+                            <span class="item-stock status-sold-out">✗ Rupture de stock</span>
+                        </div>
+                    </div>
+
+                    <!-- Hache du Bûcheron -->
+                    <div class="item-card">
+                        <div class="item-name">Hache du Bûcheron</div>
+                        <div class="item-description">
+                            • Hache en diamant pour l'exploitation forestière.<br>
+                            • Efficacité IV et Solidité III.
+                        </div>
+                        <div class="item-details">
+                            <span class="item-price">? €</span>
+                            <span class="item-stock status-sold-out">✗ Rupture de stock</span>
+                        </div>
+                    </div>
+                    <!-- Hache du Fermier -->
+                    <div class="item-card">
+                        <div class="item-name">Hache du Fermier</div>
+                        <div class="item-description">
+                            • Hache en diamant pour plus de butins.<br>
+                            • Efficacité IV, Fortune III et Solidité III.
+                        </div>
+                        <div class="item-details">
+                            <span class="item-price">? €</span>
+                            <span class="item-stock status-sold-out">✗ Rupture de stock</span>
+                        </div>
+                    </div>
+
+                    <!-- Pelle d'Appoint -->
+                    <div class="item-card">
+                        <div class="item-name">Pelle d'Appoint</div>
+                        <div class="item-description">
+                            • Pelle en diamant pour une utilisation banale.<br>
+                            • Efficacité IV et Solidité III.
+                        </div>
+                        <div class="item-details">
+                            <span class="item-price">? €</span>
+                            <span class="item-stock status-sold-out">✗ Rupture de stock</span>
+                        </div>
+                    </div>
+                    <!-- Pelle Magique -->
+                    <div class="item-card">
+                        <div class="item-name">Pelle Magique</div>
+                        <div class="item-description">
+                            • Pelle en diamant pour plus de butins.<br>
+                            • Efficacité IV, Fortune III et Solidité III.
+                        </div>
+                        <div class="item-details">
+                            <span class="item-price">? €</span>
+                            <span class="item-stock status-sold-out">✗ Rupture de stock</span>
+                        </div>
+                    </div>
+
+                    <!-- Canne d'Appoint -->
+                    <div class="item-card">
+                        <div class="item-name">Canne d'Appoint</div>
+                        <div class="item-description">
+                            • Canne pour une utilisation banale.<br>
+                            • Solidité III.
+                        </div>
+                        <div class="item-details">
+                            <span class="item-price">? €</span>
+                            <span class="item-stock status-sold-out">✗ Rupture de stock</span>
+                        </div>
+                    </div>
+                    <!-- Canne au Trésor -->
+                    <div class="item-card">
+                        <div class="item-name">Canne au Trésor</div>
+                        <div class="item-description">
+                            • Canne pour plus de trésors.<br>
+                            • Chance de la Mer III et Solidité III.
+                        </div>
+                        <div class="item-details">
+                            <span class="item-price">? €</span>
+                            <span class="item-stock status-sold-out">✗ Rupture de stock</span>
+                        </div>
+                    </div>
+                    <!-- Canne du Pêcheur -->
+                    <div class="item-card">
+                        <div class="item-name">Canne du Pêcheur</div>
+                        <div class="item-description">
+                            • Canne pour de meilleurs poissons.<br>
+                            • Appât III et Solidité III.
+                        </div>
+                        <div class="item-details">
+                            <span class="item-price">? €</span>
+                            <span class="item-stock status-sold-out">✗ Rupture de stock</span>
+                        </div>
+                    </div>
+                    <!-- Canne Merveilleuse -->
+                    <div class="item-card">
+                        <div class="item-name">Canne Merveilleuse</div>
+                        <div class="item-description">
+                            • Canne pour toute utilisation.<br>
+                            • Chance de la Mer III, Appât III et Solidité III.
+                        </div>
+                        <div class="item-details">
+                            <span class="item-price">? €</span>
+                            <span class="item-stock status-sold-out">✗ Rupture de stock</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="objets-speciaux" class="section">
+                <h2>✨ Objets Spéciaux & Rares</h2>
+                <div class="items-grid">
+                    <!-- À venir -->
+                    <div class="item-card">
+                        <div class="item-name">À venir</div>
+                        <div class="item-description">D'autres objets seront bientôt disponibles
+                            <br><br>
+                            Si vous avez des idées d'objets à ajouter à notre boutique, où si vous avez une commande particulière, contactez-nous !
+                        </div>
+                        <div class="item-details">
+                            <span class="item-price"></span>
+                            <span class="item-stock status-sold-out"></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact" class="section">
+                <div class="contact-info">
+                    <h3>🔥 Comment me contacter</h3>
+                    <p>Pour passer commande ou négocier, contactez-moi en jeu (directement ou par mail) :</p>
+                    <div class="minecraft-username">Faiizer<br>aumetallocal@gmail.com</div>
+                    <p style="margin-top: 1rem; color: #c9a96e;">
+                        📦 <strong>Livraison :</strong> Respectueuse des traditions, dans tout le serveur<br>
+                        🛠️ <strong>Commandes spéciales :</strong> Selon le Code du Fer uniquement<br>
+                        ⚒️ <strong>Garantie :</strong> Chaque pièce respecte intégralement nos valeurs
+                    </p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="footer-text">
+                "Au métal local, chaque coup de marteau respecte le Code du Fer"<br>
+                ⚒️ Tradition • Qualité • Respect du Code du Fer ⚒️
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Animation fluide pour la navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animation d'apparition des cartes au scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'slideInUp 0.6s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+
+        // Ajouter l'animation CSS
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            .item-card {
+                opacity: 0;
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Observer toutes les cartes
+        document.querySelectorAll('.item-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Effet de particules subtil sur le header
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.innerHTML = '✨';
+            particle.style.position = 'absolute';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            particle.style.opacity = '0.3';
+            particle.style.fontSize = '10px';
+            particle.style.pointerEvents = 'none';
+            particle.style.animation = 'sparkle 4s ease-in-out infinite';
+            
+            document.querySelector('header').appendChild(particle);
+            
+            setTimeout(() => {
+                particle.remove();
+            }, 4000);
+        }
+
+        // Ajouter l'animation sparkle
+        const sparkleStyle = document.createElement('style');
+        sparkleStyle.textContent = `
+            @keyframes sparkle {
+                0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+                10% { opacity: 0.3; }
+                90% { opacity: 0.3; }
+                100% { transform: translateY(-100px) rotate(180deg); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(sparkleStyle);
+
+        // Créer des particules périodiquement
+        setInterval(createParticle, 3000);
+    </script>
+</body>
+</html>
